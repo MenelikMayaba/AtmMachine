@@ -13,6 +13,13 @@ public class Account {
 
     }
 
+    public int deposit(int amount){
+        if(amount < 0){
+            throw new IllegalArgumentException("cannot deposit negative amount");
+        }
+        return amount += balance;
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }
