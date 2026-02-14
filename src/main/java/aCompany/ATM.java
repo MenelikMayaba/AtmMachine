@@ -1,9 +1,11 @@
 package aCompany;
 
+import java.io.ObjectStreamException;
+
 public class ATM {
 
-    Account account = new Account("12345", "0000", 500);;
-    private boolean isLoggedIn = true;
+    Account user = new Account("12345", "0000", 500);;
+    private boolean isLoggedIn;
 
     public Account addAccount(Account account){
         return account;
@@ -11,27 +13,47 @@ public class ATM {
 
 
     public boolean login(String accNum, String pin) {
-        if(!account.getAccountNumber().equals(accNum) || !account.getPin().equals(pin)){
+        if(!user.getAccountNumber().equals(accNum) || !user.getPin().equals(pin)){
             System.out.println("Incorrect log in details");
-            return false;
+            return isLoggedIn = false;
+
 
         }
-        return isLoggedIn;
+        return isLoggedIn = true;
     }
 
 
     public double deposit(double amount) {
-        return account.deposit(amount);
+        if(isLoggedIn){
+            return user.deposit(amount);
+        }
+        else{
+            throw new IllegalStateException("No user logged in");
+        }
+
     }
 
-    public int checkBalance() {
-        return (int) account.getBalance();
+    public double checkBalance() {
+        if(isLoggedIn){
+            return user.getBalance();
+        }
+        else{
+            throw new IllegalStateException("No user logged in");
+        }
     }
 
     public double withdraw(double amount) {
-        return account.withdraw(amount);
+        if(isLoggedIn){
+            return user.withdraw(amount);
+        }else{
+            throw new IllegalStateException("No user logged in");
+        }
+
+
     }
 
     public void logout() {
+        isLoggedIn = false;
+
     }
 }

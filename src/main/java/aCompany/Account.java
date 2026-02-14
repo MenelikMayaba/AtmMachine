@@ -45,8 +45,12 @@ public class Account {
     }
 
     public double withdraw(double amount) {
+        if(amount < 0){
+            throw new IllegalArgumentException("Withdraw amount must be positive");
+        }
         if(amount > balance){
-            throw new IllegalArgumentException("cannot withdraw more the balance");
+            throw new IllegalArgumentException("Insufficient funds");
+
         }
 
         return balance -= amount;
