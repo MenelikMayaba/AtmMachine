@@ -13,11 +13,11 @@ public class Account {
 
     }
 
-    public int deposit(int amount){
+    public double deposit(double amount){
         if(amount < 0){
-            throw new IllegalArgumentException("cannot deposit negative amount");
+            throw new IllegalArgumentException("Deposit amount must be positive");
         }
-        return amount += balance;
+        return balance += amount;
     }
 
     public String getAccountNumber() {
@@ -42,5 +42,13 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public double withdraw(double amount) {
+        if(amount > balance){
+            throw new IllegalArgumentException("cannot withdraw more the balance");
+        }
+
+        return balance -= amount;
     }
 }
